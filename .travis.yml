@@ -6,10 +6,17 @@ before_install:
     - docker build -t felipe/react-test -f./client/Dockerfile.dev ./client
 
 script:
-    - docker run felipe/react-test npm test -- --coverage
+    - run -e CI=true felipe/react-test npm test -- --coverage
 
 after_success:
     - docker build -t felipe/multi-client ./client
     - docker build -t felipe/multi-nginx ./nginx
     - docker build -t felipe/multi-server ./server
     - docker build -t felipe/multi-worker ./worker
+    #LOG IN DOCKER CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #push imagens to dockerhub
+    - docker push felipe/multi-client
+    - docker push felipe/multi-nginx
+    - docker push felipe/multi-server
+    - docker push felipe/multi-worker
