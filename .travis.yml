@@ -15,7 +15,7 @@ after_success:
     - docker build -t felipe/multi-worker ./worker
     #LOG IN DOCKER CLI
     #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_ID" -p="$DOCKER_PASSWORD";
+    - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_ID" -p="$DOCKER_PASSWORD";
     #push imagens to dockerhub
     - docker push felipe/multi-client
     - docker push felipe/multi-nginx
