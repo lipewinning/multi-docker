@@ -3,21 +3,21 @@ services:
     - docker
 
 before_install:
-    - docker build -t felipe/react-test -f./client/Dockerfile.dev ./client
+    - docker build -t lipewinning/react-test -f./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true felipe/react-test npm test -- --coverage
+    - docker run -e CI=true lipewinning/react-test npm test -- --coverage
 
 after_success:
-    - docker build -t felipe/multi-client ./client
-    - docker build -t felipe/multi-nginx ./nginx
-    - docker build -t felipe/multi-server ./server
-    - docker build -t felipe/multi-worker ./worker
+    - docker build -t lipewinning/multi-client ./client
+    - docker build -t lipewinning/multi-nginx ./nginx
+    - docker build -t lipewinning/multi-server ./server
+    - docker build -t lipewinning/multi-worker ./worker
     #LOG IN DOCKER CLI
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_ID" -p="$DOCKER_PASSWORD";
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #- docker login -e="$DOCKER_EMAIL" -u="$DOCKER_ID" -p="$DOCKER_PASSWORD";
     #push imagens to dockerhub
-    - docker push felipe/multi-client
-    - docker push felipe/multi-nginx
-    - docker push felipe/multi-server
-    - docker push felipe/multi-worker
+    - docker push lipewinning/multi-client
+    - docker push lipewinning/multi-nginx
+    - docker push lipewinning/multi-server
+    - docker push lipewinning/multi-worker
