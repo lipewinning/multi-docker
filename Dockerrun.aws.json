@@ -1,0 +1,29 @@
+{
+    "AWSEBDockerrunVersion":2, 
+    "containerDefinitions":[
+        {
+            "name":"client",
+            "image": "lipewinning/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name":"server",
+            "image":"lipewinning/server",
+            "hostname":"api",
+            "essential": false
+        },
+        {
+            "name":"worker",
+            "image":"lipewinning/server",
+            "hostname":"worker",
+            "essential":false
+        },
+        {
+            "name":"nginx",
+            "image":"lipewinning/nginx",
+            "hostname":"nginx",
+            "essential":true
+        }
+    ]
+}
