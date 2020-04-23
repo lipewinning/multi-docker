@@ -14,8 +14,7 @@ after_success:
     - docker build -t lipewinning/multi-server ./server
     - docker build -t lipewinning/multi-worker ./worker
     #LOG IN DOCKER CLI
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_ID" -p="$DOCKER_PASSWORD";
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #push imagens to dockerhub
     - docker push lipewinning/multi-client
     - docker push lipewinning/multi-nginx
